@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Detalhes do jogo {{jogos.nome}}:</h1>
+    <ul>
+        <li>Preço: {{jogos.preço}}</li>
+        <li>Ano: {{jogos.ano}}</li>
+        <li>Empresa: {{jogos.empresa}}</li>
+        <li>Plataformas:
+            {% for plataforma in jogos.plataforma.all %}
+                {{ plataforma.nome }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </li>
+    </ul>
+    <h1>DLCs:</h1>
+    {% if dlcs %}
+    <ul>
+        {% for dlc in dlcs %}
+        <li>{{dlc.nome}} - preço: {{dlc.preço}}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Não há DLCs disponíveis para esse jogo</p>
+    {% endif %}
+</body>
+</html>

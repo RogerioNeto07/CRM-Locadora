@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <a href="{% url 'adicionar' %}">Adicionar jogo</a>
+<body>
+    <h1>Jogos Disponíveis:</h1>
+    {% for jogo in jogos %}
+    <h2><a href="{% url 'details' jogo.id %}">{{jogo.nome}}</a></h2>
+    <p>Preço: {{jogo.preço}}</p>
+    {% endfor %}
+</body>
+</html>

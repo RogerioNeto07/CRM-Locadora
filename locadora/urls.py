@@ -23,4 +23,7 @@ urlpatterns = [
     path('', views.Index, name='index'),
     path('<int:jogo_id>', views.Details, name='details'),
     path('adicionar', views.Create.as_view(), name='adicionar'),
+    path('registrarpedido', views.RegistarPedido.as_view(), name='registrarpedido'),
+    path('pedidos', views.Pedidos.as_view(), name='pedidos'),
+    path('jogo/editar/<int:pk>/', views.EditarJogo.as_view(), name='editar_jogo'),
 ]

@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-    <a href="{% url 'adicionar' %}">Adicionar jogo</a>
+    <a href="{% url 'index' %}">Inicio</a>  <a href="{% url 'adicionar' %}">Adicionar jogo</a>  <a href="{% url 'registrarpedido' %}">Registrar Pedido</a>  <a href="{% url 'pedidos' %}">Lista de pedidos</a>
 <body>
     <h1>Jogos Disponíveis:</h1>
     {% for jogo in jogos %}
-    <h2><a href="{% url 'details' jogo.id %}">{{jogo.nome}}</a></h2>
+    <h2>
+        <a href="{% url 'details' jogo.id %}">{{ jogo.nome }}</a>
+        <a href="{% url 'editar_jogo' jogo.id %}" style="margin-left: 10px; color: blue;">Editar</a>
+    </h2>
     <p>Preço: {{jogo.preço}}</p>
     {% endfor %}
 </body>

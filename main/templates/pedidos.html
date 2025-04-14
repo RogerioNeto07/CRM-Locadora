@@ -8,6 +8,15 @@
     <a href="{% url 'index' %}">Inicio</a>  <a href="{% url 'adicionar' %}">Adicionar jogo</a>  <a href="{% url 'registrarpedido' %}">Registrar Pedido</a>  <a href="{% url 'pedidos' %}">Lista de pedidos</a>
 
 <body>
+    {% if messages %}
+        <ul class="messages">
+    {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+        </ul>
+    {% endif %}
+    <h1>Faturamento total da empresa: R$ <strong>{{ faturamento }}</strong> </h1>
+    
     <h1>Lista de Pedidos</h1>
 
 <ul>
@@ -27,5 +36,7 @@
         <li>Nenhum pedido registrado.</li>
     {% endfor %}
 </ul>
+
+<a href="{% url 'index' %}">página inicial</a>
 </body>
 </html>

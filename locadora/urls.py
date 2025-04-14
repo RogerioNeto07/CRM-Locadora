@@ -20,8 +20,8 @@ from main import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.Index, name='index'),
-    path('<int:jogo_id>', views.Details, name='details'),
+    path('', views.Index.as_view(), name='index'),
+    path('<int:pk>', views.Details.as_view(), name='details'),
     path('adicionar', views.Create.as_view(), name='adicionar'),
     path('registrarpedido', views.RegistarPedido.as_view(), name='registrarpedido'),
     path('pedidos', views.Pedidos.as_view(), name='pedidos'),

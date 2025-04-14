@@ -7,6 +7,13 @@
 </head>
     <a href="{% url 'index' %}">Inicio</a>  <a href="{% url 'adicionar' %}">Adicionar jogo</a>  <a href="{% url 'registrarpedido' %}">Registrar Pedido</a>  <a href="{% url 'pedidos' %}">Lista de pedidos</a>
 <body>
+    {% if messages %}
+        <ul class="messages">
+    {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+        </ul>
+    {% endif %}
     <h1>Jogos Disponíveis:</h1>
     {% for jogo in jogos %}
     <h2>

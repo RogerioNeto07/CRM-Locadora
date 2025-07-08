@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de pedidos</title>
+</head>
+    <a href="{% url 'index' %}">Inicio</a>  <a href="{% url 'adicionar' %}">Adicionar jogo</a>  <a href="{% url 'registrarpedido' %}">Registrar Pedido</a>  <a href="{% url 'pedidos' %}">Lista de pedidos</a>
+
+<body>
+    {% if messages %}
+        <ul class="messages">
+    {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+        </ul>
+    {% endif %}
+    <h1>Faturamento total da empresa: R$ <strong>{{ faturamento }}</strong> </h1>
+    
+    <h1>Lista de Pedidos</h1>
+
+<ul>
+    {% for pedido in pedidos %}
+        <li>
+            <strong>Pedido #{{ pedido.id }}</strong> - {{ pedido.data }}<br>
+            Valor: R$ {{ pedido.valor }}<br>
+            Jogos:
+            <ul>
+                {% for jogo in pedido.jogos.all %}
+                    <li>{{ jogo.nome }} - R$ {{ jogo.preço }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+        <br>
+    {% empty %}
+        <li>Nenhum pedido registrado.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'index' %}">página inicial</a>
+</body>
+</html>

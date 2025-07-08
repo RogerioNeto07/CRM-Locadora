@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar exclusão</title>
+</head>
+<body>
+    <h1>Confirmar exclusão</h1>
+    <p>Você tem certeza que deseja deletar o jogo {{object.nome}}?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sim, Deletar</button>
+        <a href="{% url 'editar_jogo' jogo.id %}">Cancelar</a>
+    </form>
+</body>
+</html>

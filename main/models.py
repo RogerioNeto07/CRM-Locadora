@@ -25,6 +25,8 @@ class Jogo(models.Model):
     empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
     plataforma = models.ManyToManyField(Plataforma)
     genero = models.ManyToManyField(Genero)
+    estoque = models.IntegerField(default=0)
+    imagem = models.ImageField(upload_to='jogos/', blank=True, null=True)
 
     def __str__(self):
         return self.nome
@@ -37,4 +39,12 @@ class DLC(models.Model):
 
     def __str__(self):
         return self.nome
+
+class Pedido(models.Model):
+    jogos = models.ManyToManyField(Jogo)
+    valor = models.FloatField(null=False, blank=False, default=0.0)
+    data = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Pedido #{self.id} - {self.data}"
 

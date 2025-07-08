@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Detalhes do jogo</title>
 </head>
 <body>
     <h1>Detalhes do jogo {{jogos.nome}}:</h1>
+    {% if jogos.imagem %}
+            <img src="{{ jogos.imagem.url }}" alt="{{ jogos.nome }}">
+            <br>
+        {% endif %}
     <ul>
         <li>Preço: {{jogos.preço}}</li>
         <li>Ano: {{jogos.ano}}</li>
         <li>Empresa: {{jogos.empresa}}</li>
+        <li>Quantidade em estoque: {{jogos.estoque}}</li>
         <li>Plataformas:
             {% for plataforma in jogos.plataforma.all %}
                 {{ plataforma.nome }}{% if not forloop.last %}, {% endif %}
@@ -27,5 +32,7 @@
     {% else %}
     <p>Não há DLCs disponíveis para esse jogo</p>
     {% endif %}
+
+    <a href="{% url 'index' %}">página inicial</a>
 </body>
 </html>

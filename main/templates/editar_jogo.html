@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar jogo</title>
+</head>
+<body>
+    <h1>Editar Produto: {{ form.instance.nome }}</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvar</button>
+</form>
+
+<hr>
+
+<h2>Ações</h2>
+<a href="{% url 'deletar_jogo' object.pk %}" style="background-color: red; color: white; padding: 10px; text-decoration: none; border-radius: 5px;">Deletar Jogo</a>
+<a href="{% url 'index' %}" style="background-color: rgb(41, 209, 55); color: white; padding: 10px; text-decoration: none; border-radius: 5px;" >Voltar para página inicial</a>
+
+</body>
+</html>

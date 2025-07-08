@@ -28,6 +28,7 @@ urlpatterns = [
     path('registrarpedido', views.RegistarPedido.as_view(), name='registrarpedido'),
     path('pedidos', views.Pedidos.as_view(), name='pedidos'),
     path('jogo/editar/<int:pk>/', views.EditarJogo.as_view(), name='editar_jogo'),
+    path('jogo/deletar/<int:pk>/', views.DeletarJogo.as_view(), name='deletar_jogo'),
 ]
 
 if settings.DEBUG:

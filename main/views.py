@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from main.models import *
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, DeleteView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from .models import *
@@ -91,3 +91,7 @@ class EditarJogo(UpdateView):
         messages.success(self.request, 'Jogo editado com sucesso!')
         return response
 
+class DeletarJogo(DeleteView):
+    model = Jogo
+    template_name = 'delete.html'
+    success_url = reverse_lazy('index')

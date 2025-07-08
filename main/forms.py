@@ -5,7 +5,7 @@ class JogoForm(forms.ModelForm):
     class Meta:
         model = Jogo
         fields = [
-            'nome', 'preço', 'ano', 'empresa', 'plataforma', 'genero', 'estoque'
+            'nome', 'preço', 'ano', 'empresa', 'plataforma', 'genero', 'estoque', 'imagem'
         ]
         widgets = { 
             'plataforma': forms.CheckboxSelectMultiple(),
@@ -16,7 +16,7 @@ class JogoEditForm(forms.ModelForm):
     class Meta:
         model = Jogo
         fields = [
-            'estoque'
+            'estoque', 'imagem'
         ]
 
 class PedidoForm(forms.ModelForm):

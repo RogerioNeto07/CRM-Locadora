@@ -88,6 +88,6 @@ class EditarJogo(UpdateView):
             form.add_error('estoque', 'o estoque não pode ser negativo')
             return self.form_invalid(form)
         response = super().form_valid(form)
-        messages.success(self.request, 'Estoque do jogo editado com sucesso!')
+        messages.success(self.request, 'Jogo editado com sucesso!')
         return response
 

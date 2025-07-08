@@ -26,6 +26,7 @@ class Jogo(models.Model):
     plataforma = models.ManyToManyField(Plataforma)
     genero = models.ManyToManyField(Genero)
     estoque = models.IntegerField(default=0)
+    imagem = models.ImageField(upload_to='jogos/', blank=True, null=True)
 
     def __str__(self):
         return self.nome

@@ -7,6 +7,10 @@
 </head>
 <body>
     <h1>Detalhes do jogo {{jogos.nome}}:</h1>
+    {% if jogos.imagem %}
+            <img src="{{ jogos.imagem.url }}" alt="{{ jogos.nome }}">
+            <br>
+        {% endif %}
     <ul>
         <li>Preço: {{jogos.preço}}</li>
         <li>Ano: {{jogos.ano}}</li>

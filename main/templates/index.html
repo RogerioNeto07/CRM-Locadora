@@ -17,10 +17,15 @@
     <h1>Jogos Disponíveis:</h1>
     {% for jogo in jogos %}
     <h2>
+        {% if jogo.imagem %}
+            <a href="{% url 'details' jogo.id %}"><img src="{{ jogo.imagem.url }}" alt="{{ jogo.nome }}"></a>
+            <br>
+        {% endif %}
         <a href="{% url 'details' jogo.id %}">{{ jogo.nome }}</a>
         <a href="{% url 'editar_jogo' jogo.id %}" style="margin-left: 10px; color: blue;">Editar</a>
     </h2>
     <p>Preço: {{jogo.preço}}</p>
+    <hr>
     {% endfor %}
 </body>
 </html>

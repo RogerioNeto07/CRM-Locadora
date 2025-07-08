@@ -8,8 +8,8 @@ media
 # Backup files # 
 *.bak 
 
-#databe
-*.sqlite3
+#database
+db.sqlite3
 
 # If you are using PyCharm # 
 # User-specific stuff

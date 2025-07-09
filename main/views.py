@@ -6,6 +6,10 @@ from django.urls import reverse_lazy
 from .models import *
 from .forms import JogoForm, PedidoForm, JogoEditForm
 from django.contrib import messages
+from rest_framework import generics, viewsets
+from .serializers import *
+
+# views da aplicação django tradicional
 
 class Index(ListView):
     template_name = 'index.html'
@@ -22,13 +26,6 @@ class Details(DetailView):
         jogo = self.get_object()
         context['dlcs'] = DLC.objects.filter(jogo=jogo)
         return context
-
-
-# def Details(request, jogo_id):
-#     jogos = Jogo.objects.get(id=jogo_id)
-#     dlcs = DLC.objects.filter(jogo_id=jogo_id)
-#     context = {'jogos' : jogos, 'dlcs' : dlcs}
-#     return render (request, 'details.html', context)
 
 class Create(CreateView):
     template_name = 'create.html'
@@ -95,3 +92,28 @@ class DeletarJogo(DeleteView):
     model = Jogo
     template_name = 'delete.html'
     success_url = reverse_lazy('index')
+
+#views da API
+class JogoViewSet(viewsets.ModelViewSet):
+    queryset = Jogo.objects.all()
+    serializer_class = JogoSerializer
+
+class DLCViewSet(viewsets.ModelViewSet):
+    queryset = DLC.objects.all()
+    serializer_class = DLCSerializer
+
+class PlataformaViewSet(viewsets.ModelViewSet):
+    queryset = Plataforma.objects.all()
+    serializer_class = PlataformaSerializer
+
+class EmpresaViewSet(viewsets.ModelViewSet):
+    queryset = Empresa.objects.all()
+    serializer_class = EmpresaSerializer
+
+class GeneroViewSet(viewsets.ModelViewSet):
+    queryset = Genero.objects.all()
+    serializer_class = GeneroSerializer
+
+class PedidoViewSet(viewsets.ModelViewSet):
+    queryset = Pedido.objects.all()
+    serializer_class = PedidoSerializer

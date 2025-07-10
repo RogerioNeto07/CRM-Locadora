@@ -6,7 +6,10 @@ from django.urls import reverse_lazy
 from .models import *
 from .forms import JogoForm, PedidoForm, JogoEditForm
 from django.contrib import messages
-from rest_framework import generics, viewsets
+from django.contrib.auth import login, authenticate
+from rest_framework import generics, viewsets, status, permissions
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from .serializers import *
 
 # views da aplicação django tradicional
@@ -117,3 +120,23 @@ class GeneroViewSet(viewsets.ModelViewSet):
 class PedidoViewSet(viewsets.ModelViewSet):
     queryset = Pedido.objects.all()
     serializer_class = PedidoSerializer
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = RegisterSerializer
+
+class LoginView(APIView):
+    permission_classes = (permissions.AllowAny,)
+    def post(self, request):
+        serializer = LoginSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        username = serializer.validated_data['username']
+        password = serializer.validated_data['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key}, status=status.HTTP_200_OK)
+        else:
+            return Response({'error': 'Credenciais inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
+

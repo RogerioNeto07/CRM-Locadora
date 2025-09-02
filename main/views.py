@@ -3,6 +3,8 @@ from main.models import *
 from django.views.generic import CreateView, ListView, DetailView, DeleteView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
+
+from main.permissions import IsDonoDaEmpresa
 from .models import *
 from .forms import JogoForm, PedidoForm, JogoEditForm
 from django.contrib import messages
@@ -10,7 +12,10 @@ from django.contrib.auth import login, authenticate
 from rest_framework import generics, viewsets, status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from decimal import Decimal
+from django.db.models import Sum
 from .serializers import *
+from .permissions import IsDonoDaEmpresa
 
 # views da aplicação django tradicional
 
@@ -139,4 +144,16 @@ class LoginView(APIView):
             return Response({'token': token.key}, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Credenciais inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
+        
+class FaturamentoView(APIView):
+    permission_classes = [IsDonoDaEmpresa]
+
+    def get(self, request, *args, **kwargs):
+        faturamento = Pedido.objects.aggregate(total_faturamento=Sum('valor'))['total_faturamento']
+
+        if faturamento is None:
+            faturamento = Decimal('0.00')
+
+        serializer = FaturamentoSerializer({'total_faturamento': faturamento})
+        return Response(serializer.data, status=status.HTTP_200_OK)
 

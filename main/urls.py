@@ -15,4 +15,5 @@ urlpatterns = [
     path('register/', views.RegisterView.as_view(), name='register'),
     path('login/', views.LoginView.as_view(), name='login'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('faturamento/', views.FaturamentoView.as_view(), name='faturamento'),
 ]

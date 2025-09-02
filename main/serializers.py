@@ -89,3 +89,6 @@ class RegisterSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(required=True)
     password = serializers.CharField(required=True, write_only=True)
+
+class FaturamentoSerializer(serializers.Serializer):
+    total_faturamento = serializers.DecimalField(max_digits=10, decimal_places=2)

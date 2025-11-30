@@ -16,6 +16,55 @@ Autenticação: Token Authentication (DRF)
 ## Endpoints da API:
 A API principal está disponível sob o prefixo: /api/.
 
+### Autenticação:
+| Método   | Endpoint                  | Descrição                                            |
+| -------- | ------------------------- | ---------------------------------------------------- |
+| `POST`    | `api/register`               | Cria uma nova conta de usuário/cliente.                |
+| `POST`    | `api/login`           | Realiza o login do usuário e retorna o token de autenticação.  |
+
+### Jogos
+| Método   | Endpoint              | Descrição                               | Permissão          |
+| -------- | ---------------------- | ---------------------------------------- | ------------------ |
+| GET      | /api/jogos/           | Lista todos os jogos disponíveis.        | AllowAny           |
+| GET      | /api/jogos/:id/       | Detalhes de um jogo específico.          | AllowAny           |
+| POST     | /api/jogos/           | Cadastra um novo jogo no estoque.        | IsAuthenticated    |
+| PUT      | /api/jogos/:id/       | Atualiza informações de um jogo.         | IsAuthenticated    |
+| DELETE   | /api/jogos/:id/       | Remove um jogo do estoque.               | IsAuthenticated    |
+
+### DLCs
+| Método   | Endpoint      | Descrição        | Permissão |
+| -------- | ------------- | ---------------- | ---------- |
+| GET      | /api/dlcs/    | CRUD para DLCs.  | Variável   |
+
+### Empresas
+| Método   | Endpoint           | Descrição             | Permissão |
+| -------- | ------------------ | --------------------- | ---------- |
+| GET      | /api/empresas/     | CRUD para Empresas.   | Variável   |
+
+### Plataformas
+| Método   | Endpoint              | Descrição               | Permissão |
+| -------- | ---------------------- | ------------------------ | ---------- |
+| GET      | /api/plataformas/     | CRUD para Plataformas.   | Variável   |
+
+### Gêneros
+| Método   | Endpoint         | Descrição           | Permissão |
+| -------- | ---------------- | ------------------- | ---------- |
+| GET      | /api/generos/    | CRUD para Gêneros.  | Variável   |
+
+### Pedidos (Vendas/Aluguéis)
+| Método   | Endpoint             | Descrição                           | Permissão       |
+| -------- | --------------------- | ------------------------------------ | ---------------- |
+| GET      | /api/pedidos/         | Lista todos os pedidos registrados.  | IsAuthenticated |
+| GET      | /api/pedidos/:id/     | Detalhes de um pedido.               | IsAuthenticated |
+| POST     | /api/pedidos/         | Registra um novo pedido/aluguel.     | IsAuthenticated |
+| PUT      | /api/pedidos/:id/     | Atualiza status/dados de um pedido.  | IsAuthenticated |
+| DELETE   | /api/pedidos/:id/     | Cancela ou remove um pedido.         | IsAuthenticated |
+
+### Faturamento
+| Método   | Endpoint              | Descrição                                         | Permissão        |
+| -------- | ---------------------- | ------------------------------------------------- | ---------------- |
+| GET      | /api/faturamento/     | Retorna o valor total do faturamento dos pedidos. | IsDonoDaEmpresa |
+
 
 
 ## Executando com Django
